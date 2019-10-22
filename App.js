@@ -4,6 +4,7 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import Home from './components/Home';
 import Game from './components/Game';
+import About from './components/About';
 
 export default class App extends Component {
   render(){
@@ -35,6 +36,12 @@ const stackNavigator = createStackNavigator(
         navigationOptions : {
             title: 'Game',
         }
+    },
+    About: {
+      screen: About,
+      navigationOptions: {
+        title: 'About'
+      }
     }
     },
     {

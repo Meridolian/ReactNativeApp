@@ -10,12 +10,18 @@ export default class Home extends Component {
         this.props.navigation.navigate('Game');
     }
 
+    goToAbout = () => {
+        this.props.navigation.navigate('About');
+    }
+
     render() {
         return (
             <View>
                 <Text style={style.title}>THE PRICE'S RIGHT</Text>
                 <Text>{"\n"}{"\n"}</Text>
-                <Button title="PLAY" onPress={this.goToGame} class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">PLAY</Button>
+                <Button title="PLAY" onPress={this.goToGame} class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" />
+                <Text>{"\n"}{"\n"}{"\n"}{"\n"}{"\n"}{"\n"}</Text>
+                <Button title="About" onPress={this.goToAbout} class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" />
             </View>
         );
     }
