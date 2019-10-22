@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
-import { Actions } from 'react-native-router-flux';
 
 export default class Home extends Component {
-
+    static navigationOptions = {
+        title: 'Home',
+    };
+    
     goToGame = () => {
-        Actions.Game();
+        this.props.navigation.navigate('Game');
     }
 
     render() {
         return (
             <View>
-                <Text style={style.title}>THE PRICE'S RIGHT {"\n"}{"\n"}</Text>
-                <Button title="PLAY" onPress="goToGame()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">PLAY</Button>
+                <Text style={style.title}>THE PRICE'S RIGHT</Text>
+                <Text>{"\n"}{"\n"}</Text>
+                <Button title="PLAY" onPress={this.goToGame} class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">PLAY</Button>
             </View>
         );
     }
@@ -22,6 +25,8 @@ export default class Home extends Component {
 
 const style = StyleSheet.create({
     title: {
-        fontSize: 50
+        marginTop: 50,
+        fontSize: 40,
+        textAlign: "center"
     }
 });
