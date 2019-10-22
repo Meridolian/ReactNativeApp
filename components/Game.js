@@ -35,7 +35,7 @@ export default class Game extends Component {
         }
         else if(this.state.userNumber === null){
             this.setState({
-                alert : "Please enter a number"
+                alert : "Please enter a number."
             })
         }
     }
