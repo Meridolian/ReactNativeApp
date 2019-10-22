@@ -20,27 +20,30 @@ export default class Game extends Component {
     }
 
     compare = () => {
-        if(this.state.userNumber === this.state.randomNumber){
+        console.log(this.state.randomNumber);
+        if(this.state.userNumber > 0 && this.state.userNumber < 101){
+            if(this.state.userNumber == this.state.randomNumber){
+                this.setState({
+                    alert : "FOUND IT, CONGRATS !"
+                })
+            }
+            else if(this.state.userNumber < this.state.randomNumber){
+                this.setState({
+                    alert : "It's more"
+                })
+            }
+            else if(this.state.userNumber > this.state.randomNumber){
+                this.setState({
+                    alert : "It's less"
+                })
+            }
+        }
+        else {
             this.setState({
-                alert : "FOUND IT, CONGRATS !"
+                alert : "Please enter a number between 0 and 100."
             })
         }
-        else if(this.state.userNumber < this.state.randomNumber){
-            this.setState({
-                alert : "It's more"
-            })
-        }
-        else if(this.state.userNumber > this.state.randomNumber){
-            this.setState({
-                alert : "It's less"
-            })
-        }
-        else if(this.state.userNumber === null){
-            this.setState({
-                alert : "Please enter a number."
-            })
-        }
-    }
+    }  
 
     goToHome = () => {
         this.props.navigation.navigate('Home');
@@ -53,8 +56,8 @@ export default class Game extends Component {
                 <Text>{'\n'}</Text>
                 <Button onPress={this.random} class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" title="Reset">Reset</Button>
                 <Text>Find the number between 0 and 100</Text>
-                <TextInput placeholder="Enter a number" keyboardType={'numeric'} onChangeText={(userNumber) => this.setState({userNumber})} />  
-                <Button onPress={this.compare} class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" title="TRY">TRY</Button>
+                <TextInput placeholder="Enter a number between 0 and a 100" onChangeText={(userNumber) => this.setState({userNumber})} />  
+                <Button onPress={this.compare} class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" title="TRY" />
                 <Text>{'\n'}{'\n'}</Text>
                 <Message message={this.state.alert} />
                 <Text>{'\n'}{'\n'}{'\n'}{'\n'}</Text>
