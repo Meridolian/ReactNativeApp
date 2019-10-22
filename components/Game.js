@@ -4,20 +4,22 @@ import Message from './Message';
 
 export default class Game extends Component {
 
-    userNumber;
-    randomNumber;
-    alert;
-
-    constructor(){
-        this.state = { userNumber: null }
-        random();
+    constructor(props){
+        super(props);
+        this.state = { 
+            userNumber: '',
+            randomNumber : Math.floor(Math.random() * 100) + 1
+        }
     }
 
-    random() {
-        this.state.randomNumber = Math.floor(Math.random() * 100) + 1;
+    random = () => {
+        this.setState({
+            randomNumber: Math.floor(Math.random() * 100) + 1,
+            userNumber: ''
+        }); 
     }
 
-    compare() {
+    compare = () => {
         if(this.state.userNumber === this.state.randomNumber){
             this.setState({
                 alert : "FOUND IT, CONGRATS !"
@@ -40,17 +42,23 @@ export default class Game extends Component {
         }
     }
 
+    goToHome = () => {
+        this.props.navigation.navigate('Home');
+    }
+
     render(){
         return(
             <View>
                 <Text h1>THE PRICE'S RIGHT</Text>
                 <Text>{'\n'}</Text>
-                <Button onPress={this.random()} class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" title="Reset">Reset</Button>
+                <Button onPress={this.random} class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" title="Reset">Reset</Button>
                 <Text>Find the number between 0 and 100</Text>
                 <TextInput placeholder="Enter a number" keyboardType={'numeric'} onChangeText={(userNumber) => this.setState({userNumber})} />  
-                <Button onPress={this.compare()} class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" title="TRY">TRY</Button>
+                <Button onPress={this.compare} class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" title="TRY">TRY</Button>
                 <Text>{'\n'}{'\n'}</Text>
                 <Message message={this.state.alert} />
+                <Text>{'\n'}{'\n'}{'\n'}{'\n'}</Text>
+                <Button title="Back" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onPress={this.goToHome} >Back to Home</Button>
             </View>
         );
     }

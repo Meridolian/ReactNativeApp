@@ -1,15 +1,14 @@
-import React from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import { Router, Scene } from 'react-native-router-flux';
+import React, { Component } from 'react';
+import { StyleSheet } from 'react-native';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 import Home from './components/Home';
-import Game from './components/game'
+import Game from './components/Game';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Routes />
-    </View>
-  );
+export default class App extends Component {
+  render(){
+    return <AppNavigator style={styles.container}/>
+  }
 }
 
 const styles = StyleSheet.create({
@@ -21,4 +20,26 @@ const styles = StyleSheet.create({
   },
 });
 
-//A FAIRE LES ROUTES !!!!!!!!!!
+
+
+const stackNavigator = createStackNavigator(
+    {
+    Home : {
+        screen: Home,
+        navigationOptions : {
+            title: 'Home',
+        }
+    },
+    Game : {
+        screen : Game,
+        navigationOptions : {
+            title: 'Game',
+        }
+    }
+    },
+    {
+        initialRouteName: 'Home',
+    }
+);
+
+const AppNavigator = createAppContainer(stackNavigator);
