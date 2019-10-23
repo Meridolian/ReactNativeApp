@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Button, TextInput } from 'react-native';
+import { Text, View, Button, TextInput, StyleSheet } from 'react-native';
 import Message from './Message';
 
 export default class Game extends Component {
@@ -8,7 +8,8 @@ export default class Game extends Component {
         super(props);
         this.state = { 
             userNumber: '',
-            randomNumber : Math.floor(Math.random() * 100) + 1
+            randomNumber : Math.floor(Math.random() * 100) + 1,
+            counter: 0
         }
     }
 
@@ -20,8 +21,10 @@ export default class Game extends Component {
     }
 
     compare = () => {
-        console.log(this.state.randomNumber);
         if(this.state.userNumber > 0 && this.state.userNumber < 101){
+            this.setState({
+                counter: this.state.counter + 1
+            });
             if(this.state.userNumber == this.state.randomNumber){
                 this.setState({
                     alert : "FOUND IT, CONGRATS !"
@@ -58,6 +61,7 @@ export default class Game extends Component {
                 <Text>Find the number between 0 and 100</Text>
                 <TextInput placeholder="Enter a number between 0 and a 100" onChangeText={(userNumber) => this.setState({userNumber})} />  
                 <Button onPress={this.compare} class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" title="TRY" />
+                <Text>Try : </Text><Text style={style.counter}>{this.state.counter}</Text>
                 <Text>{'\n'}{'\n'}</Text>
                 <Message message={this.state.alert} />
                 <Text>{'\n'}{'\n'}{'\n'}{'\n'}</Text>
@@ -66,3 +70,9 @@ export default class Game extends Component {
         );
     }
 }
+
+const style = StyleSheet.create({
+    counter: {
+        color: 'red'
+    }
+})
